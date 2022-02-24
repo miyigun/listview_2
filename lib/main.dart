@@ -32,44 +32,36 @@ class ListViewBody extends StatelessWidget{
 
 Widget _myListView(BuildContext context){
   //Resimlerle ListView
-  return ListView(
-    children: [
-      ListTile(
+  return ListView.builder(
+    itemCount: 5,
+    itemBuilder: (context,index){
+      return ListTile(
         leading: CircleAvatar(
-          backgroundImage: AssetImage("images/1.jpg"),
+          backgroundImage: AssetImage("images/"+(index+1).toString()+".jpg"),
         ),
-        title: Text("1.Resim"),
-        subtitle: Text("Avatar-1 gösterildi"),
-      ),
-      ListTile(
-        leading: CircleAvatar(
-          backgroundImage: AssetImage("images/2.jpg"),
-        ),
-        title: Text("2.Resim"),
-        subtitle: Text("Avatar-2 gösterildi"),
-      ),
-      ListTile(
-        leading: CircleAvatar(
-          backgroundImage: AssetImage("images/3.jpg"),
-        ),
-        title: Text("3.Resim"),
-        subtitle: Text("Avatar-3 gösterildi"),
-      ),
-      ListTile(
-        leading: CircleAvatar(
-          backgroundImage: AssetImage("images/4.jpg"),
-        ),
-        title: Text("4.Resim"),
-        subtitle: Text("Avatar-4 gösterildi"),
-      ),
-      ListTile(
-        leading: CircleAvatar(
-          backgroundImage: AssetImage("images/5.jpg"),
-        ),
-        title: Text("5.Resim"),
-        subtitle: Text("Avatar-5 gösterildi"),
-      ),
-    ],
+        title: Text((index+1).toString()+".Resim"),
+        subtitle: Text("Avatar-"+(index+1).toString()+" gösterildi"),
+        onTap: (){
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text("Tıklandı!"),
+                  content: Text((index+1).toString()+".seçenek seçildi"),
+                  actions: [
+                    TextButton(
+                        onPressed: (){
+                          Navigator.pop(context);
+                        },
+                        child: Text("Tamam"),
+                    )
+                  ],
+                );
+              }
+          );
+        },
+      );
+    },
   );
     //Iconlu ListView
     /*ListView(
